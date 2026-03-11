@@ -10,6 +10,73 @@
 
 <style>
 
+body{
+font-family: Arial, Helvetica, sans-serif;
+margin:0;
+background:white;
+color:black;
+}
+
+header{
+text-align:center;
+padding:60px;
+border-bottom:1px solid black;
+}
+
+nav{
+text-align:center;
+padding:20px;
+border-bottom:1px solid black;
+}
+
+nav a{
+margin:0 15px;
+text-decoration:none;
+color:black;
+font-weight:bold;
+}
+
+section{
+max-width:900px;
+margin:auto;
+padding:60px 20px;
+}
+
+h2{
+border-bottom:1px solid black;
+padding-bottom:10px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:12px;
+margin-top:20px;
+}
+
+.grid img{
+width:100%;
+height:250px;
+object-fit:cover;
+cursor:pointer;
+transition:0.2s;
+}
+
+.grid img:hover{
+transform:scale(1.03);
+}
+
+iframe{
+width:100%;
+height:300px;
+}
+
+footer{
+text-align:center;
+padding:30px;
+border-top:1px solid black;
+}
+  
 #lightbox{
 display:none;
 position:fixed;
@@ -128,9 +195,6 @@ Escribí aquí tu descripción: quién sos, qué hacés, formación o proyectos.
 
 </footer>
 
-<div id="lightbox" onclick="closeImage()">
-<img id="lightbox-img">
-</div>
 
 <script>
 
@@ -187,17 +251,21 @@ prevImage();
 
 });
 
+function closeImage(){
+document.getElementById("lightbox").style.display="none";
+}
+
 </script>
 
-<div id="lightbox">
+<div id="lightbox" onclick="closeImage()">
 
-<span id="prev" onclick="prevImage()">❮</span>
+<span id="prev" onclick="event.stopPropagation(); prevImage()">❮</span>
 
 <img id="lightbox-img">
 
 <iframe id="lightbox-video" frameborder="0" allowfullscreen></iframe>
 
-<span id="next" onclick="nextImage()">❯</span>
+<span id="next" onclick="event.stopPropagation(); nextImage()">❯</span>
 
 </div>
 
