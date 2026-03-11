@@ -10,15 +10,15 @@
 
 <style>
 
+html{
+scroll-behavior:smooth;
+}
+
 body{
 font-family: Arial, Helvetica, sans-serif;
 margin:0;
 background:white;
 color:black;
-
-html{
-scroll-behavior:smooth;
-}
 }
 
 header{
@@ -155,7 +155,7 @@ transform:scale(1.03);
 
 </head>
 
-<body>
+<body tabindex="0">
 
 <header>
 
@@ -320,6 +320,8 @@ let video=document.getElementById("lightbox-video");
 video.style.display="block";
 
 video.src=el.dataset.video+"?autoplay=1";
+
+setTimeout(()=>{document.body.focus();},100);
 
 }
 
