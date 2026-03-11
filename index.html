@@ -144,9 +144,9 @@ user-select:none;
 
 <div class="grid">
 
-<img src="images/foto1.jpg" onclick="openImage(this)">
-<img src="images/foto2.jpg" onclick="openImage(this)">
-<img src="images/foto3.jpg" onclick="openImage(this)">
+<img src="images/foto1.jpg" data-gallery="foto" onclick="openImage(this)">
+<img src="images/foto2.jpg" data-gallery="foto" onclick="openImage(this)">
+<img src="images/foto3.jpg" data-gallery="foto" onclick="openImage(this)">
 
 </div>
 
@@ -158,8 +158,8 @@ user-select:none;
 
 <div class="grid">
 
-<img src="images/diseno1.jpg" onclick="openImage(this)">
-<img src="images/diseno2.jpg" onclick="openImage(this)">
+<img src="images/diseno1.jpg" data-gallery="diseno" onclick="openImage(this)">
+<img src="images/diseno2.jpg" data-gallery="diseno" onclick="openImage(this)">
 
 </div>
 
@@ -195,26 +195,22 @@ Escribí aquí tu descripción: quién sos, qué hacés, formación o proyectos.
 
 </footer>
 
-
 <script>
 
 let gallery=[];
 let currentIndex=0;
-
-document.querySelectorAll(".grid img").forEach((img,index)=>{
-gallery.push(img.src);
-img.dataset.index=index;
-});
+let currentGallery="";
 
 function openImage(img){
 
-currentIndex=parseInt(img.dataset.index);
+currentGallery=img.dataset.gallery;
+
+gallery=[...document.querySelectorAll(`img[data-gallery="${currentGallery}"]`)]
+.map(i=>i.src);
+
+currentIndex=gallery.indexOf(img.src);
 
 document.getElementById("lightbox").style.display="flex";
-
-document.getElementById("lightbox-img").style.display="block";
-document.getElementById("lightbox-video").style.display="none";
-
 document.getElementById("lightbox-img").src=gallery[currentIndex];
 
 }
@@ -222,7 +218,6 @@ document.getElementById("lightbox-img").src=gallery[currentIndex];
 function nextImage(){
 
 currentIndex=(currentIndex+1)%gallery.length;
-
 document.getElementById("lightbox-img").src=gallery[currentIndex];
 
 }
@@ -230,15 +225,18 @@ document.getElementById("lightbox-img").src=gallery[currentIndex];
 function prevImage(){
 
 currentIndex=(currentIndex-1+gallery.length)%gallery.length;
-
 document.getElementById("lightbox-img").src=gallery[currentIndex];
 
+}
+
+function closeImage(){
+document.getElementById("lightbox").style.display="none";
 }
 
 document.addEventListener("keydown",function(e){
 
 if(e.key==="Escape"){
-document.getElementById("lightbox").style.display="none";
+closeImage();
 }
 
 if(e.key==="ArrowRight"){
@@ -250,10 +248,6 @@ prevImage();
 }
 
 });
-
-function closeImage(){
-document.getElementById("lightbox").style.display="none";
-}
 
 </script>
 
