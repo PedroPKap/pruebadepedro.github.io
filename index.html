@@ -191,9 +191,13 @@ margin-top:20px;
 
 <div class="video-grid">
 
-<iframe src="https://www.youtube.com/embed/dgp8NeM-Kfc"></iframe>
+<img src="https://img.youtube.com/vi/dgp8NeM-Kfc/maxresdefault.jpg"
+data-video="https://www.youtube.com/embed/dgp8NeM-Kfc"
+onclick="openVideo(this)">
 
-<iframe src="https://www.youtube.com/embed/-3iCU1BU1k0"></iframe>
+<img src="https://img.youtube.com/vi/-3iCU1BU1k0/maxresdefault.jpg"
+data-video="https://www.youtube.com/embed/-3iCU1BU1k0"
+onclick="openVideo(this)">
 
 </div>
 
@@ -250,10 +254,12 @@ document.getElementById("lightbox-img").src=gallery[currentIndex];
 }
 
 function closeImage(){
-document.getElementById("lightbox").style.display="none";
-}
 
-document.addEventListener("keydown",function(e){
+document.getElementById("lightbox").style.display="none";
+
+document.getElementById("lightbox-video").src="";
+
+}
 
 if(e.key==="Escape"){
 closeImage();
@@ -268,6 +274,20 @@ prevImage();
 }
 
 });
+
+function openVideo(el){
+
+document.getElementById("lightbox").style.display="flex";
+
+document.getElementById("lightbox-img").style.display="none";
+
+let video=document.getElementById("lightbox-video");
+
+video.style.display="block";
+
+video.src=el.dataset.video+"?autoplay=1";
+
+}
 
 </script>
 
