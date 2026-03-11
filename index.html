@@ -17,16 +17,18 @@ scroll-behavior:smooth;
 body{
 font-family: Arial, Helvetica, sans-serif;
 margin:0;
+color:white;
 
 background:
-radial-gradient(circle at 10% 20%, #ff9a9e 0%, transparent 40%),
-radial-gradient(circle at 80% 30%, #a1c4fd 0%, transparent 40%),
-radial-gradient(circle at 30% 80%, #fad0c4 0%, transparent 40%),
-radial-gradient(circle at 90% 80%, #c2e9fb 0%, transparent 40%),
-radial-gradient(circle at 50% 50%, #fbc2eb 0%, transparent 50%),
-#ffffff;
+radial-gradient(circle at 20% 30%, #5a2a6d 0%, transparent 45%),
+radial-gradient(circle at 80% 20%, #1e3a8a 0%, transparent 45%),
+radial-gradient(circle at 30% 80%, #7a1f3d 0%, transparent 45%),
+radial-gradient(circle at 90% 75%, #0f766e 0%, transparent 45%),
+radial-gradient(circle at 50% 50%, #3b0764 0%, transparent 60%),
+url("https://grainy-gradients.vercel.app/noise.svg");
 
-color:black;
+background-color:#0b0b0f;
+background-size:cover,cover,cover,cover,cover,200px;
 }
 
 header{
@@ -159,6 +161,11 @@ transition:0.2s;
 transform:scale(1.03);
 }
 
+header, nav, section, footer{
+background:rgba(0,0,0,0.25);
+backdrop-filter:blur(4px);
+}
+  
 </style>
 
 </head>
