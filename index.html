@@ -15,6 +15,10 @@ font-family: Arial, Helvetica, sans-serif;
 margin:0;
 background:white;
 color:black;
+
+html{
+scroll-behavior:smooth;
+}
 }
 
 header{
@@ -257,6 +261,9 @@ video.src="";
 image.style.display="block";
 image.src=gallery[currentIndex];
 
+document.getElementById("prev").style.display="block";
+document.getElementById("next").style.display="block";
+
 }
 
 function nextImage(){
@@ -302,6 +309,9 @@ function openVideo(el){
 document.getElementById("lightbox").style.display="flex";
 
 document.getElementById("lightbox-img").style.display="none";
+
+document.getElementById("prev").style.display="none";
+document.getElementById("next").style.display="none";
 
 let video=document.getElementById("lightbox-video");
 
