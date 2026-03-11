@@ -79,13 +79,11 @@ width:100%;
 height:250px;
 object-fit:cover;
 cursor:pointer;
-filter:grayscale(100%);
 transition:0.2s;
 }
 
 .grid img:hover{
-filter:grayscale(0%);
-transform:scale(1.02);
+transform:scale(1.03);
 }
 
 img{
@@ -102,6 +100,47 @@ text-align:center;
 padding:30px;
 border-top:1px solid black;
 }
+
+
+
+#lightbox{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.95);
+justify-content:center;
+align-items:center;
+z-index:1000;
+}
+
+#lightbox img,
+#lightbox iframe{
+max-width:90vw;
+max-height:90vh;
+}
+
+#lightbox iframe{
+display:none;
+width:80vw;
+height:45vw;
+}
+
+#prev,#next{
+position:absolute;
+top:50%;
+font-size:40px;
+color:white;
+cursor:pointer;
+padding:20px;
+user-select:none;
+}
+
+#prev{left:20px;}
+#next{right:20px;}
+
 
 </style>
 
@@ -161,7 +200,7 @@ border-top:1px solid black;
 <div class="grid">
 
 <iframe src="https://www.youtube.com/embed/VIDEOID"></iframe>
-  
+
 <iframe src="https://www.youtube.com/embed/VIDEOID"></iframe>
 
 </div>
@@ -190,28 +229,72 @@ Escribí aquí tu descripción: quién sos, qué hacés, formación o proyectos.
 
 <script>
 
+let gallery=[];
+let currentIndex=0;
+
+document.querySelectorAll(".grid img").forEach((img,index)=>{
+gallery.push(img.src);
+img.dataset.index=index;
+});
+
 function openImage(img){
 
+currentIndex=parseInt(img.dataset.index);
+
 document.getElementById("lightbox").style.display="flex";
-document.getElementById("lightbox-img").src=img.src;
+
+document.getElementById("lightbox-img").style.display="block";
+document.getElementById("lightbox-video").style.display="none";
+
+document.getElementById("lightbox-img").src=gallery[currentIndex];
 
 }
 
-function closeImage(){
+function nextImage(){
 
+currentIndex=(currentIndex+1)%gallery.length;
+
+document.getElementById("lightbox-img").src=gallery[currentIndex];
+
+}
+
+function prevImage(){
+
+currentIndex=(currentIndex-1+gallery.length)%gallery.length;
+
+document.getElementById("lightbox-img").src=gallery[currentIndex];
+
+}
+
+document.addEventListener("keydown",function(e){
+
+if(e.key==="Escape"){
 document.getElementById("lightbox").style.display="none";
-
 }
 
-document.addEventListener("keydown",function(event){
+if(e.key==="ArrowRight"){
+nextImage();
+}
 
-if(event.key==="Escape"){
-closeImage();
+if(e.key==="ArrowLeft"){
+prevImage();
 }
 
 });
 
 </script>
+
+<div id="lightbox">
+
+<span id="prev" onclick="prevImage()">❮</span>
+
+<img id="lightbox-img">
+
+<iframe id="lightbox-video" frameborder="0" allowfullscreen></iframe>
+
+<span id="next" onclick="nextImage()">❯</span>
+
+</div>
 
 </body>
 </html>
